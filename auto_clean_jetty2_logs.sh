@@ -12,4 +12,5 @@ archive=${DB}_${DATE}
 
    
 find $LOG_DR -name "*.stderrout.log.*"  -type f -mtime +3 -exec rm -rf {} \;
+find $LOG_DR -name "*.stderrout.log"  -type f -mtime +3 -exec rm -rf {} \;
 echo "`date`  clean $i log is ok" >> /tmp/clean2_logs.log

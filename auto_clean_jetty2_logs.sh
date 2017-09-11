@@ -1,7 +1,7 @@
 #!/bin/bash
 #author=yancong
 #EMAIL:516249940@qq.com
-#version 1.0
+#version 1.1
 #del 3days ago "*.stderrout.log.*"
 LOG_DR=/data/jetty-app/web/
 DAYS=3

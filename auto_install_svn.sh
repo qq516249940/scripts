@@ -1,4 +1,8 @@
 #!/bin/bash
+#author=yancong
+#EMAIL:516249940@qq.com
+#version 1.0
+#auto install svn and start
 
 SVN_DR=/data/svn
 SVN_REPO=svnrepos

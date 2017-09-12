@@ -12,9 +12,9 @@ svnserve --version
 mkdir -p $SVN_DR
 svnadmin create $SVN_DR/$SVN_REPO
 ls $SVN_DR/$SVN_REPO
-#添加admin用户
+#指定内容后 添加admin用户，
 sed -i '/# sally = sallyssecret/a\#添加admin用户\nadmin = 123456' /data/svn/svnrepos/conf/passwd
-#添加admin用户权限为rw
+#最后一行 添加admin用户权限为rw
 sed -i '$a\\n#添加新建的用户admin，并授予rw权限\n[/]\nadmin = rw' /data/svn/svnrepos/conf/authz
 
 #更改配置文件俺

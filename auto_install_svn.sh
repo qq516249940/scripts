@@ -14,3 +14,7 @@ svnadmin create $SVN_DR/$SVN_REPO
 ls $SVN_DR/$SVN_REPO
 #更改配置文件俺
 sed -i 's#OPTIONS=\"-r /var/svn\"#OPTIONS=\"-r $SVN_DR/$SVN_REPO"#g' /etc/sysconfig/svnserve
+#设置开机启动
+systemctl enable svnserve.service 
+systemctl start svnserve.service
+systemctl restart svnserve.service 

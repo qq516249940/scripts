@@ -1,4 +1,9 @@
 #!/bin/sh
+#author=yancong
+#EMAIL:516249940@qq.com
+#version 1.0
+#备份/data目录
+
 srcdir=/data/
 dstdir=gitlab_bakcup
 excludedir=/script/inotify/exclude.list

@@ -1,4 +1,9 @@
 #!/bin/sh
+#author=yancong
+#EMAIL:516249940@qq.com
+#version 1.0
+#备份/opt/gitlab/目录
+
 srcdir=/opt/gitlab/
 dstdir=gitlab_var
 excludedir=/script/inotify/exclude.list

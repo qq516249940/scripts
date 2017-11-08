@@ -1,0 +1,12 @@
+---
+# author: chunk
+#
+- name: configure | Setup zabbix server config file.
+  replace: path={{ zabbix_agent_conf_path }}/zabbix_agentd.conf regexp={{ item.r }} replace={{ item.s }}
+  with_items:
+    - { r: "Server=127.0.0.1", s: "Server={{ zabbix_agent_server_host }}"}
+    - { r: "ServerActive=127.0.0.1", s: "ServerActive={{ zabbix_agent_server_host }}"}
+    - { r: "Hostname=Zabbix server", s: "Hostname={{ zabbix_agent_hostname }}"}
+
+- name: chkconfig zabbix-agent on
+  service: name=zabbix-agent enabled=yes state=restarted

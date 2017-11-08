@@ -1,0 +1,12 @@
+---
+# tasks file for zabbix-agent
+# author:chunk
+  
+
+  - include: install-from-package.yml
+    when: not zabbix_agent_install_from_source
+
+  - include: install-from-source.yml
+    when: zabbix_agent_install_from_source
+ 
+  - include: configure.yml

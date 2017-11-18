@@ -51,8 +51,8 @@ def list_show(fileDir):
                 else:
                     print "没有你要删除的文件"
             # 如果是文件夹，用这个可以递归
-            # elif os.path.isdir(fileDir+"/"+eachFile):
-            #         listDir(fileDir+"/"+eachFile);
+        # elif os.path.isdir(fileDir+"/"+eachFile):
+        #         listDir(fileDir+"/"+eachFile);
             except IOError,e:
                 print e;
                 # logger3.error('e') ;

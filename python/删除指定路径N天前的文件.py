@@ -33,7 +33,7 @@ logger3.addHandler(ch)
 
 
 def list_show(fileDir):
-    ”“”删除N天前的脚本，可以准确到秒，按照时间戳计算，path需要指定路径，n_day需要指明天数。"""
+    """删除N天前的脚本，可以准确到秒，按照时间戳计算，path需要指定路径，n_day需要指明天数。"""
     for eachFile in os.listdir(fileDir):
         # 如果是文件
         if os.path.isfile(fileDir+"/"+eachFile):

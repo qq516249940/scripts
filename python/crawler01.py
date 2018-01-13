@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+#Python爬虫实战一之爬取糗事百科段子
 import urllib
 import urllib2
 import re

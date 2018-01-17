@@ -3,28 +3,35 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 '''
-作者：昨夜星辰
+原作者：昨夜星辰  修改：chunk
 注意事项：该脚本只能在Linux环境用Python 2.x运行，如需在其他环境运行请读者自行修改。
+添加了异常try except，和time
 '''
 import re
 import os
 import shutil
 import requests
 from bs4 import BeautifulSoup
+import time
 
 # 创建文件夹，若已存在则删除，再创建。
 def create_folder(path):
     if os.path.exists(path):
         if os.path.isdir(path):
-            shutil.rmtree(path)
+            pass
+            # shutil.rmtree(path)
         else:
-            os.remove(path)
-    os.mkdir(path)    
-    
+            pass
+            # os.remove(path)
+    try:
+      os.mkdir(path)
+    except:
+      print "文件夹已经存在"
 # 询问用户
 def ask_user(string):
     while True:
-        answer = raw_input(string)
+       # answer = raw_input(string)
+        answer = "Y"
         if answer == 'Y':
             return True
         elif answer == 'N':
@@ -32,12 +39,12 @@ def ask_user(string):
         else:
             print '输入有误，请重新输入！'
 
-# 创建根目录            
-root_folder = '淘女郎'
+# 创建根目录
+root_folder = '淘宝女郎'
 create_folder(root_folder)
 
 # 遍历每位淘女郎
-url = 'https://mm.taobao.com/json/request_top_list.htm?page=1'
+url = 'https://mm.taobao.com/json/request_top_list.htm?page=2'
 bs1 = BeautifulSoup(requests.get(url).text, 'lxml')
 for top in bs1('p', 'top'):
     name = top.find('a').text
@@ -45,11 +52,11 @@ for top in bs1('p', 'top'):
     city = top.find('span').text
     user_id = top.find('span', 'friend-follow J_FriendFollow')['data-userid']
     print '发现一位美眉，她叫做%s，今年%s，住在%s，现在开始爬取她的个人页面……' % (name, age, city)
-    
+
     # 以淘女郎的昵称新建文件夹
     mm_folder = '%s/%s' % (root_folder, name)
-    create_folder(mm_folder)    
-    
+    create_folder(mm_folder)
+
     # 获取淘女郎的个人资料并保存到文件
     url = 'https://mm.taobao.com/self/info/model_info_show.htm?user_id=' + user_id
     bs2 = BeautifulSoup(requests.get(url).text, 'lxml')
@@ -73,18 +80,18 @@ for top in bs1('p', 'top'):
     with open(filename, 'w') as f:
         f.write('\r\n'.join(result))
     print '保存完毕！'
-    
+
     # 获取相册的总页数
     url = 'https://mm.taobao.com/self/album/open_album_list.htm?_charset=utf-8&user_id%20=' + user_id
     bs3 = BeautifulSoup(requests.get(url).text, 'lxml')
     album_total_page = int(bs3.find('input', id='J_Totalpage')['value'])
-    
+
     # 遍历每一页
     for album_page in range(1, album_total_page + 1):
         url = 'https://mm.taobao.com/self/album/open_album_list.htm?_charset=utf-8&user_id%%20=%s&page=%d' % (user_id, album_page)
         bs3 = BeautifulSoup(requests.get(url).text, 'lxml')
         album_count = 1
-        
+
         # 遍历每一个相册
         for album_area in bs3('div', 'mm-photo-cell-middle'):
             # 获取相册的链接、id、名称和照片数
@@ -94,28 +101,39 @@ for top in bs1('p', 'top'):
             pic_num = album_area.find('span', 'mm-pic-number').text
             pic_num = re.search(r'\d+', pic_num).group(0)
             print '现在开始爬取她的第%d个相册，相册名为：《%s》(%s张)……' % (album_count, album_name, pic_num)
-            
+
             # 根据照片数计算总页数
-            total_page = int(pic_num) / 16 + 1            
-            
+            total_page = int(pic_num) / 16 + 1
+
             # 以相册名新建文件夹
             album_folder = '%s/%s' % (mm_folder, album_name)
             create_folder(album_folder)
-            
+
             pic_count = 1
             # 遍历每一页
             for page in range(1, total_page + 1):
                 url = 'https://mm.taobao.com/album/json/get_album_photo_list.htm?user_id=%s&album_id=%s&page=%s' % (user_id, album_id, page)
-                json = requests.get(url).json()
-                for pic in json['picList']:
-                    print '现在开始下载该相册的第%d张照片……' % pic_count,
-                    pic_url = 'https:' + pic['picUrl']
-                    pic_url = re.sub(r'290', '620', pic_url)
-                    filename = '%s/%s.jpg' % (album_folder, pic_count)
-                    with open(filename, 'wb') as f:
-                        f.write(requests.get(pic_url).content)
-                    print '下载完毕！'
-                    pic_count += 1
+                try:
+                  json = requests.get(url).json()
+                except:
+                  try:
+                    time.sleep(60)
+                    json = requests.get(url).json()
+                  except:
+                    print "连接断开"
+                  
+                try: 
+                  for pic in json['picList']:
+                      print '现在开始下载该相册的第%d张照片……' % pic_count,
+                      pic_url = 'https:' + pic['picUrl']
+                      pic_url = re.sub(r'290', '620', pic_url)
+                      filename = '%s/%s.jpg' % (album_folder, pic_count)
+                      with open(filename, 'wb') as f:
+                          f.write(requests.get(pic_url).content)
+                      print '下载完毕！'
+                      pic_count += 1
+                except:
+                      pic_count += 1
             if ask_user('该相册已经下载完毕，是否下载下一个相册？（Y/N）') == False:
                 break
             album_count += 1

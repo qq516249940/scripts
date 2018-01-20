@@ -31,7 +31,9 @@ class RedisHelper():
     def delallkey(self):
         keys = self.__redis.keys()
         print(self.__redis.delete(*keys))
-
+        # r.flushdb()        # 清空r中的所有数据"Delete all keys in the current database"
+        # r.flushall()        # 清空r中的所有数据"Delete all keys in all databases on the current host"
+        
     #查看当前数据库大小
     def dbsize(self):
         print(self.__redis.dbsize())

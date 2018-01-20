@@ -1,0 +1,48 @@
+#-*- coding:utf-8 -*-
+
+
+import redis   # 导入redis模块，通过python操作redis 也可以直接在redis主机的服务端操作缓存数据库
+import sys
+reload(sys)
+
+
+sys.setdefaultencoding('utf-8')
+print sys.getdefaultencoding()
+
+class RedisHelper():
+    #创建redis连接池
+    def __init__(self,host='10.0.40.242', port=6379, decode_responses=True, db=0,password='abcdxxredis'):
+        try:
+            self.__redis = redis.StrictRedis(host,port,db,password,decode_responses=True)
+        except Exception,e:
+            print e.message
+    #添加redis
+    def set(self,key,value):
+        self.__redis.set(key,value)
+    #获取redis键值
+    def get(self,key):
+        print(self.__redis.get(key))
+    #获取redis所有的键值
+    def getallkey(self):
+        keys = self.__redis.keys()
+        for key in keys:
+            print(self.__redis.get(key))
+    #删除redis所有的键值
+    def delallkey(self):
+        keys = self.__redis.keys()
+        print(self.__redis.delete(*keys))
+
+    #查看当前数据库大小
+    def dbsize(self):
+        print(self.__redis.dbsize())
+
+if __name__ == '__main__':
+    r = RedisHelper()
+    # r.set('scm.goods.guess.1','1')
+    # r.set('scm.goods.guess.2','2')
+    # r.set('scm.goods.guess.3','3')
+    # r.set('scm.goods.guess.4','4')
+    # r.set('scm.goods.guess.5','5')
+    # r.get('scm.goods.guess.1')
+    r.getallkey()
+    r.dbsize()

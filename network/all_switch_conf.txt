@@ -1,0 +1,2727 @@
+Started by timer
+Building in workspace /var/lib/jenkins/workspace/cisco
+[cisco] $ python /tmp/jenkins6916516253104740832.py
+SSH connection established to 10.0.1.254:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.254      YES NVRAM  up                    up      
+Vlan40                 10.0.40.254     YES manual up                    up      
+Vlan50                 10.0.50.254     YES NVRAM  up                    up      
+Vlan60                 10.0.60.254     YES NVRAM  up                    up      
+Vlan70                 10.0.70.254     YES NVRAM  up                    up      
+Vlan80                 10.0.80.254     YES NVRAM  up                    up      
+FastEthernet0          unassigned      YES NVRAM  administratively down down    
+GigabitEthernet1/0/1   unassigned      YES unset  down                  down    
+GigabitEthernet1/0/2   unassigned      YES unset  up                    up      
+GigabitEthernet1/0/3   unassigned      YES unset  up                    up      
+GigabitEthernet1/0/4   unassigned      YES unset  down                  down    
+GigabitEthernet1/0/5   unassigned      YES unset  down                  down    
+GigabitEthernet1/0/6   unassigned      YES unset  down                  down    
+GigabitEthernet1/0/7   unassigned      YES unset  down                  down    
+GigabitEthernet1/0/8   unassigned      YES unset  down                  down    
+GigabitEthernet1/0/9   unassigned      YES unset  down                  down    
+GigabitEthernet1/0/10  unassigned      YES unset  up                    up      
+GigabitEthernet1/0/11  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/12  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/13  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/14  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/15  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/16  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/17  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/18  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/19  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/20  unassigned      YES unset  down                  down    
+GigabitEthernet1/0/21  unassigned      YES unset  up                    up      
+GigabitEthernet1/0/22  unassigned      YES unset  up                    up      
+GigabitEthernet1/0/23  unassigned      YES unset  up                    up      
+GigabitEthernet1/0/24  unassigned      YES unset  up                    up      
+GigabitEthernet1/1/1   unassigned      YES unset  up                    up      
+GigabitEthernet1/1/2   unassigned      YES unset  down                  down    
+GigabitEthernet1/1/3   unassigned      YES unset  down                  down    
+GigabitEthernet1/1/4   unassigned      YES unset  down                  down    
+Te1/1/1                unassigned      YES unset  down                  down    
+Te1/1/2                unassigned      YES unset  down                  down    
+Building configuration...
+
+Current configuration : 6324 bytes
+!
+version 12.2
+no service pad
+service telnet-zeroidle
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sw3750
+!
+boot-start-marker
+boot-end-marker
+!
+enable password huasan@123
+!
+username admin privilege 15 password 0 huasan@123
+!
+!
+no aaa new-model
+switch 1 provision ws-c3750x-24
+system mtu routing 1500
+ip routing
+ip dhcp excluded-address 10.0.40.200 10.0.40.252
+!
+ip dhcp pool vlan50
+   network 10.0.50.0 255.255.255.0
+   default-router 10.0.50.254 
+   dns-server 114.114.114.114 8.8.8.8 
+   lease 0 12
+!
+ip dhcp pool vlan60
+   network 10.0.60.0 255.255.255.0
+   default-router 10.0.60.254 
+   dns-server 114.114.114.114 8.8.8.8 
+   lease 0 12
+!
+ip dhcp pool vlan70
+   network 10.0.70.0 255.255.255.0
+   default-router 10.0.70.254 
+   dns-server 114.114.114.114 8.8.8.8 
+   lease 0 12
+!
+ip dhcp pool vlan80
+   network 10.0.80.0 255.255.255.0
+   default-router 10.0.80.254 
+   dns-server 114.114.114.114 8.8.8.8 
+   lease 0 12
+!
+ip dhcp pool vlan40
+   network 10.0.40.0 255.255.255.0
+   default-router 10.0.40.254 
+   dns-server 114.114.114.114 8.8.8.8 
+   lease 0 12
+!
+!
+ip dhcp snooping
+!
+!
+crypto pki trustpoint TP-self-signed-294505728
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-294505728
+ revocation-check none
+ rsakeypair TP-self-signed-294505728
+!
+!
+crypto pki certificate chain TP-self-signed-294505728
+ certificate self-signed 01
+  3082023D 308201A6 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32393435 30353732 38301E17 0D393330 33303130 30303132 
+  325A170D 32303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3239 34353035 
+  37323830 819F300D 06092A86 4886F70D 01010105 0003818D 00308189 02818100 
+  EA9240A4 5BFF5BB5 05F7E144 A41B7AF7 7539CC78 9E6AEBD8 FD8B36E5 30A74E7B 
+  F7CC5E4C 1971FC25 60B31A30 BB36E759 C2D586A1 B729A6A7 90BA19A5 401D85CC 
+  05E9FF8B E37587A2 E08CA719 DCA81FD6 E0F561BD 6C6AFE47 25E82672 B9A562CC 
+  EC02D0B4 6E9A8C5D A384F8AC BC640A2E 5CCBB3FD 4AA49A30 EE5F237E E6272F61 
+  02030100 01A36730 65300F06 03551D13 0101FF04 05300301 01FF3012 0603551D 
+  11040B30 09820773 77333735 302E301F 0603551D 23041830 1680143E 12230F19 
+  688EF121 0022A121 09AC3F9A 4BF89730 1D060355 1D0E0416 04143E12 230F1968 
+  8EF12100 22A12109 AC3F9A4B F897300D 06092A86 4886F70D 01010405 00038181 
+  005103CD C1ED38C0 3FB47014 5C961DE1 43E80D6F 521BD868 9291E0C0 3B319459 
+  92CA9828 D657E51F 0B627F99 214591A7 74A93887 4F92A43B 9D0D2CDC 38DF19F3 
+  7E7D24FB C997DA89 55B1875B AF4E30DF 2F2B9301 28A7A33C 30AA21C9 804B36E7 
+  7DB4BEAF F003E44F 066662BA 8526441C 5462AE7C 798E8A7D 3758A271 1F4AB66C 77
+  quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ no ip route-cache cef
+ no ip route-cache
+ no ip mroute-cache
+ shutdown
+!
+interface GigabitEthernet1/0/1
+ description <To-ASA_port0>
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/2
+ description <To-sw_poe2>
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/3
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/4
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/5
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/6
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/7
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/8
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/9
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/10
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/11
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/12
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/14
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/15
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/16
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/17
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/18
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet1/0/19
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ speed 100
+!
+interface GigabitEthernet1/0/20
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/21
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/22
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/23
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/24
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet1/1/1
+ description <To-WLC_port1>
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface GigabitEthernet1/1/2
+!
+interface GigabitEthernet1/1/3
+!
+interface GigabitEthernet1/1/4
+!
+interface TenGigabitEthernet1/1/1
+!
+interface TenGigabitEthernet1/1/2
+!
+interface Vlan1
+ ip address 10.0.1.254 255.255.255.0
+!
+interface Vlan40
+ ip address 10.0.40.254 255.255.255.0
+!
+interface Vlan50
+ ip address 10.0.50.254 255.255.255.0
+!
+interface Vlan60
+ ip address 10.0.60.254 255.255.255.0
+!
+interface Vlan70
+ ip address 10.0.70.254 255.255.255.0
+!
+interface Vlan80
+ ip address 10.0.80.254 255.255.255.0
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.0.1.253
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+ password huasan@123
+line vty 0 4
+ login local
+line vty 5 15
+ login
+!
+end
+
+>>>>>>>>> End <<<<<<<<<
+SSH connection established to 10.0.1.3:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.3        YES manual up                    up      
+FastEthernet0/1        unassigned      YES unset  up                    up      
+FastEthernet0/2        unassigned      YES unset  down                  down    
+FastEthernet0/3        unassigned      YES unset  up                    up      
+FastEthernet0/4        unassigned      YES unset  down                  down    
+FastEthernet0/5        unassigned      YES unset  down                  down    
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  down                  down    
+FastEthernet0/9        unassigned      YES unset  down                  down    
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  down                  down    
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  down                  down    
+FastEthernet0/16       unassigned      YES unset  down                  down    
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  down                  down    
+FastEthernet0/19       unassigned      YES unset  down                  down    
+FastEthernet0/20       unassigned      YES unset  down                  down    
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  down                  down    
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  down                  down    
+FastEthernet0/25       unassigned      YES unset  down                  down    
+FastEthernet0/26       unassigned      YES unset  down                  down    
+FastEthernet0/27       unassigned      YES unset  down                  down    
+FastEthernet0/28       unassigned      YES unset  down                  down    
+FastEthernet0/29       unassigned      YES unset  down                  down    
+FastEthernet0/30       unassigned      YES unset  down                  down    
+FastEthernet0/31       unassigned      YES unset  down                  down    
+FastEthernet0/32       unassigned      YES unset  down                  down    
+FastEthernet0/33       unassigned      YES unset  down                  down    
+FastEthernet0/34       unassigned      YES unset  down                  down    
+FastEthernet0/35       unassigned      YES unset  down                  down    
+FastEthernet0/36       unassigned      YES unset  down                  down    
+FastEthernet0/37       unassigned      YES unset  down                  down    
+FastEthernet0/38       unassigned      YES unset  down                  down    
+FastEthernet0/39       unassigned      YES unset  down                  down    
+FastEthernet0/40       unassigned      YES unset  down                  down    
+FastEthernet0/41       unassigned      YES unset  down                  down    
+FastEthernet0/42       unassigned      YES unset  down                  down    
+FastEthernet0/43       unassigned      YES unset  down                  down    
+FastEthernet0/44       unassigned      YES unset  down                  down    
+FastEthernet0/45       unassigned      YES unset  down                  down    
+FastEthernet0/46       unassigned      YES unset  down                  down    
+FastEthernet0/47       unassigned      YES unset  down                  down    
+FastEthernet0/48       unassigned      YES unset  down                  down    
+GigabitEthernet0/1     unassigned      YES unset  up                    up      
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+Building configuration...
+
+Current configuration : 7436 bytes
+!
+! Last configuration change at 18:26:38 UTC Mon Nov 29 1993 by admin
+!
+version 15.2
+no service pad
+service telnet-zeroidle
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sw2960-1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username admin privilege 15 password 0 huasan@123
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip dhcp snooping
+!
+!
+crypto pki trustpoint TP-self-signed-843925760
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-843925760
+ revocation-check none
+ rsakeypair TP-self-signed-843925760
+!
+!
+crypto pki certificate chain TP-self-signed-843925760
+ certificate self-signed 01
+  30820229 30820192 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  30312E30 2C060355 04031325 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 38343339 32353736 30301E17 0D393330 33303130 30303832 
+  315A170D 32303031 30313030 30303030 5A303031 2E302C06 03550403 1325494F 
+  532D5365 6C662D53 69676E65 642D4365 72746966 69636174 652D3834 33393235 
+  37363030 819F300D 06092A86 4886F70D 01010105 0003818D 00308189 02818100 
+  8DFD2D51 F03C02ED F120F5A8 256B6F14 92EAC659 3ACF9082 B588A93B ACC3DA5B 
+  D4B744CA 6F1092D9 0ECC21A0 A3FA2657 6FDD95DA E109AB82 BD1A0379 8166FFE3 
+  8EB739E6 8151C1EB 52B566B3 4CC1E504 62E62F67 6525FA18 8F71CE43 7B74FBE7 
+  6A096BFB A9326025 1AF5E7EF AB4CF9D5 E82D9817 129BE60A 353F5857 A6A467B5 
+  02030100 01A35330 51300F06 03551D13 0101FF04 05300301 01FF301F 0603551D 
+  23041830 168014B8 3293658A A2340F91 A408F0BD BAD6D950 B0566F30 1D060355 
+  1D0E0416 0414B832 93658AA2 340F91A4 08F0BDBA D6D950B0 566F300D 06092A86 
+  4886F70D 01010505 00038181 00784C7A A02896C3 DB541869 1A486230 66B77F84 
+  A514BE40 EACF60CA CE4B11E1 163DFAE0 D9739957 BF2B9613 0BBF35DF 11E96D9D 
+  8EFF28E0 88A1A103 4BCD43C2 1099EA06 313C678E 163EDDD1 A09F35AF D2ECBF6B 
+  CD63345B 5E317A1B 5BC115F6 ED8C207D E7809A25 1B190632 32D30E21 5422EF7C 
+  6D75F8D1 603CACF8 166C8D9A 91
+  	quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/25
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/26
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/27
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/28
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/29
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/30
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/31
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/32
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/33
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/34
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/35
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/36
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/37
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/38
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/39
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/40
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/41
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/42
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/43
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/44
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/45
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/46
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/47
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/48
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.1.3 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.0.1.254
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+ password huasan@123
+line vty 0 4
+ login local
+line vty 5 15
+ login
+!
+end
+
+>>>>>>>>> End <<<<<<<<<
+SSH connection established to 10.0.1.4:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.4        YES NVRAM  up                    up      
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  down                  down    
+FastEthernet0/3        unassigned      YES unset  up                    up      
+FastEthernet0/4        unassigned      YES unset  up                    up      
+FastEthernet0/5        unassigned      YES unset  up                    up      
+FastEthernet0/6        unassigned      YES unset  up                    up      
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  up                    up      
+FastEthernet0/9        unassigned      YES unset  down                  down    
+FastEthernet0/10       unassigned      YES unset  up                    up      
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  down                  down    
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  down                  down    
+FastEthernet0/16       unassigned      YES unset  down                  down    
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  up                    up      
+FastEthernet0/19       unassigned      YES unset  up                    up      
+FastEthernet0/20       unassigned      YES unset  down                  down    
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  down                  down    
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  down                  down    
+FastEthernet0/25       unassigned      YES unset  up                    up      
+FastEthernet0/26       unassigned      YES unset  up                    up      
+FastEthernet0/27       unassigned      YES unset  down                  down    
+FastEthernet0/28       unassigned      YES unset  up                    up      
+FastEthernet0/29       unassigned      YES unset  down                  down    
+FastEthernet0/30       unassigned      YES unset  down                  down    
+FastEthernet0/31       unassigned      YES unset  down                  down    
+FastEthernet0/32       unassigned      YES unset  down                  down    
+FastEthernet0/33       unassigned      YES unset  down                  down    
+FastEthernet0/34       unassigned      YES unset  down                  down    
+FastEthernet0/35       unassigned      YES unset  down                  down    
+FastEthernet0/36       unassigned      YES unset  up                    up      
+FastEthernet0/37       unassigned      YES unset  down                  down    
+FastEthernet0/38       unassigned      YES unset  down                  down    
+FastEthernet0/39       unassigned      YES unset  down                  down    
+FastEthernet0/40       unassigned      YES unset  up                    up      
+FastEthernet0/41       unassigned      YES unset  up                    up      
+FastEthernet0/42       unassigned      YES unset  down                  down    
+FastEthernet0/43       unassigned      YES unset  up                    up      
+FastEthernet0/44       unassigned      YES unset  down                  down    
+FastEthernet0/45       unassigned      YES unset  up                    up      
+FastEthernet0/46       unassigned      YES unset  up                    up      
+FastEthernet0/47       unassigned      YES unset  down                  down    
+FastEthernet0/48       unassigned      YES unset  down                  down    
+GigabitEthernet0/1     unassigned      YES unset  up                    up      
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+Building configuration...
+
+Current configuration : 7434 bytes
+!
+! Last configuration change at 00:01:05 UTC Mon Mar 1 1993
+!
+version 15.2
+no service pad
+service telnet-zeroidle
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sw2960-2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username admin privilege 15 password 0 huasan@123
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip dhcp snooping
+!
+!
+crypto pki trustpoint TP-self-signed-2691775616
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2691775616
+ revocation-check none
+ rsakeypair TP-self-signed-2691775616
+!
+!
+crypto pki certificate chain TP-self-signed-2691775616
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32363931 37373536 3136301E 170D3933 30333031 30303031 
+  31345A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 36393137 
+  37353631 3630819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100B87A 487966A4 9638045C 1ACE5EBB 63D8AA64 AA7CAAFA 5674779F A4F4453B 
+  2F9F8D37 EB3A0905 7FAD13E2 47424EE3 6B469AE4 723F9C4B 2C95575A EBAF978C 
+  AA5391AC 790083A9 D7908442 3E4B2B4E 8343DC4B 0AD1292D AB37ED77 D38E8D40 
+  3FB5AF1E 8CFA87A4 940601F4 A21E268E C883DC0E 403C49EA BE60286E FCA489BD 
+  E2250203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14EC24C3 CEB5409A DA7B4398 146E837C A9DE3E70 51301D06 
+  03551D0E 04160414 EC24C3CE B5409ADA 7B439814 6E837CA9 DE3E7051 300D0609 
+  2A864886 F70D0101 05050003 81810078 0225496D 84428045 8AC050E1 FF3F0088 
+  8CF71FA5 F4DC73C9 BEC1A827 AA884AE5 06A0381C 9D802595 67F2A1C5 E77216D9 
+  C56D6F6D 074B1EA0 431BA48A 7918741A 43050C4A BBEED7A7 1885D484 886532CD 
+  EA2A5CA7 28E1639E E447B3E4 65C2D461 B17FF461 5166E068 2A5F5C45 2281DE34 
+  1D228839 397D7BE1 6B48A508 AF2278
+  	quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/25
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/26
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/27
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/28
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/29
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/30
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/31
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/32
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/33
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/34
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/35
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/36
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/37
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/38
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/39
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/40
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/41
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/42
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/43
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/44
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/45
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/46
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/47
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/48
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.1.4 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.0.1.254
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+ password huasan@123
+line vty 0 4
+ login local
+line vty 5 15
+ login
+!
+end
+
+>>>>>>>>> End <<<<<<<<<
+SSH connection established to 10.0.1.5:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.5        YES NVRAM  up                    up      
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  up                    up      
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  up                    up      
+FastEthernet0/5        unassigned      YES unset  up                    up      
+FastEthernet0/6        unassigned      YES unset  up                    up      
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  down                  down    
+FastEthernet0/9        unassigned      YES unset  up                    up      
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  down                  down    
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  down                  down    
+FastEthernet0/16       unassigned      YES unset  up                    up      
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  up                    up      
+FastEthernet0/19       unassigned      YES unset  down                  down    
+FastEthernet0/20       unassigned      YES unset  down                  down    
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  down                  down    
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  down                  down    
+FastEthernet0/25       unassigned      YES unset  down                  down    
+FastEthernet0/26       unassigned      YES unset  down                  down    
+FastEthernet0/27       unassigned      YES unset  down                  down    
+FastEthernet0/28       unassigned      YES unset  down                  down    
+FastEthernet0/29       unassigned      YES unset  down                  down    
+FastEthernet0/30       unassigned      YES unset  down                  down    
+FastEthernet0/31       unassigned      YES unset  down                  down    
+FastEthernet0/32       unassigned      YES unset  down                  down    
+FastEthernet0/33       unassigned      YES unset  down                  down    
+FastEthernet0/34       unassigned      YES unset  down                  down    
+FastEthernet0/35       unassigned      YES unset  down                  down    
+FastEthernet0/36       unassigned      YES unset  down                  down    
+FastEthernet0/37       unassigned      YES unset  down                  down    
+FastEthernet0/38       unassigned      YES unset  down                  down    
+FastEthernet0/39       unassigned      YES unset  down                  down    
+FastEthernet0/40       unassigned      YES unset  down                  down    
+FastEthernet0/41       unassigned      YES unset  down                  down    
+FastEthernet0/42       unassigned      YES unset  down                  down    
+FastEthernet0/43       unassigned      YES unset  down                  down    
+FastEthernet0/44       unassigned      YES unset  down                  down    
+FastEthernet0/45       unassigned      YES unset  down                  down    
+FastEthernet0/46       unassigned      YES unset  down                  down    
+FastEthernet0/47       unassigned      YES unset  down                  down    
+FastEthernet0/48       unassigned      YES unset  up                    up      
+GigabitEthernet0/1     unassigned      YES unset  up                    up      
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+Building configuration...
+
+Current configuration : 7413 bytes
+!
+! Last configuration change at 00:01:05 UTC Mon Mar 1 1993
+!
+version 15.2
+no service pad
+service telnet-zeroidle
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sw2960-3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username admin privilege 15 password 0 huasan@123
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip dhcp snooping
+!
+!
+crypto pki trustpoint TP-self-signed-2691755520
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2691755520
+ revocation-check none
+ rsakeypair TP-self-signed-2691755520
+!
+!
+crypto pki certificate chain TP-self-signed-2691755520
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32363931 37353535 3230301E 170D3933 30333031 30303031 
+  31335A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 36393137 
+  35353532 3030819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100CE7D FD494A5A 983BDCE0 0FA02104 6B9C2FF0 AFCAEE8D 4B4DEA92 76089B78 
+  0CF7554E 3DC0414E 2890170F BE81EE19 5FD5700F 337DD0B9 6CE4AF88 A2372BF6 
+  5BDF06BB 815A652D 2773F94D 48F26C04 2729C33B 3B63E55D F9F0DF28 D202C981 
+  BC9CAF88 3B60CA01 3CE993BA 8CF70091 0555227F C445EAAA 352B0B6E 53658E6E 
+  FA1B0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 1479A343 9D4A54CC B32CD65A 4EC56DCF 47B240E5 EB301D06 
+  03551D0E 04160414 79A3439D 4A54CCB3 2CD65A4E C56DCF47 B240E5EB 300D0609 
+  2A864886 F70D0101 05050003 8181007E 66D4F887 31B3F6AC C73AEF45 68D0267C 
+  A65AFE6E A71D4583 BC9B86A4 B4163FE2 C5E09D09 250378E6 8C0B4818 B3471F75 
+  15CD41A5 706E433F 28F3459A A3BBAE91 7D20695A D5CFE78D 2D3D142F 03E1BDE0 
+  FE1358E8 658899EE 7FFFBB79 EE46C0CC 501214AC 16CA55B1 2217D3C3 36B9CB6E 
+  A288EC6F AF99E406 6E7D4AA2 7D62BD
+  	quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/25
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/26
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/27
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/28
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/29
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/30
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/31
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/32
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/33
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/34
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/35
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/36
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/37
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/38
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/39
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/40
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/41
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/42
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/43
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/44
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/45
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/46
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/47
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/48
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.1.5 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.0.1.254
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+line vty 5 15
+ login
+!
+end
+
+>>>>>>>>> End <<<<<<<<<
+SSH connection established to 10.0.1.6:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.6        YES NVRAM  up                    up      
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  down                  down    
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  down                  down    
+FastEthernet0/5        unassigned      YES unset  down                  down    
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  up                    up      
+FastEthernet0/9        unassigned      YES unset  up                    up      
+FastEthernet0/10       unassigned      YES unset  up                    up      
+FastEthernet0/11       unassigned      YES unset  up                    up      
+FastEthernet0/12       unassigned      YES unset  up                    up      
+FastEthernet0/13       unassigned      YES unset  up                    up      
+FastEthernet0/14       unassigned      YES unset  up                    up      
+FastEthernet0/15       unassigned      YES unset  up                    up      
+FastEthernet0/16       unassigned      YES unset  up                    up      
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  down                  down    
+FastEthernet0/19       unassigned      YES unset  up                    up      
+FastEthernet0/20       unassigned      YES unset  up                    up      
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  up                    up      
+FastEthernet0/23       unassigned      YES unset  up                    up      
+FastEthernet0/24       unassigned      YES unset  down                  down    
+FastEthernet0/25       unassigned      YES unset  up                    up      
+FastEthernet0/26       unassigned      YES unset  down                  down    
+FastEthernet0/27       unassigned      YES unset  up                    up      
+FastEthernet0/28       unassigned      YES unset  down                  down    
+FastEthernet0/29       unassigned      YES unset  up                    up      
+FastEthernet0/30       unassigned      YES unset  up                    up      
+FastEthernet0/31       unassigned      YES unset  down                  down    
+FastEthernet0/32       unassigned      YES unset  up                    up      
+FastEthernet0/33       unassigned      YES unset  down                  down    
+FastEthernet0/34       unassigned      YES unset  down                  down    
+FastEthernet0/35       unassigned      YES unset  up                    up      
+FastEthernet0/36       unassigned      YES unset  up                    up      
+FastEthernet0/37       unassigned      YES unset  down                  down    
+FastEthernet0/38       unassigned      YES unset  down                  down    
+FastEthernet0/39       unassigned      YES unset  down                  down    
+FastEthernet0/40       unassigned      YES unset  down                  down    
+FastEthernet0/41       unassigned      YES unset  down                  down    
+FastEthernet0/42       unassigned      YES unset  up                    up      
+FastEthernet0/43       unassigned      YES unset  down                  down    
+FastEthernet0/44       unassigned      YES unset  down                  down    
+FastEthernet0/45       unassigned      YES unset  down                  down    
+FastEthernet0/46       unassigned      YES unset  down                  down    
+FastEthernet0/47       unassigned      YES unset  up                    up      
+FastEthernet0/48       unassigned      YES unset  down                  down    
+GigabitEthernet0/1     unassigned      YES unset  up                    up      
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+Building configuration...
+
+Current configuration : 7422 bytes
+!
+! Last configuration change at 05:33:22 UTC Thu Dec 9 1993 by admin
+!
+version 15.2
+no service pad
+service telnet-zeroidle
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sw2960-6
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username admin privilege 15 password 0 huasan@123
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip dhcp snooping
+!
+!
+crypto pki trustpoint TP-self-signed-2694726528
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2694726528
+ revocation-check none
+ rsakeypair TP-self-signed-2694726528
+!
+!
+crypto pki certificate chain TP-self-signed-2694726528
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32363934 37323635 3238301E 170D3933 30333031 30303031 
+  31335A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 36393437 
+  32363532 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100B2F0 F6332B0D BE9FF28D 68B9F182 E87C3820 EBAF1306 CDB7A3B7 F20D19E7 
+  93458258 D5D1E8D4 EF93D896 FCCEA054 011E6E43 357EEC91 6C744A35 B7143F94 
+  C1F705CD D518AE3C FA076767 2B3CCEE8 7F760124 0532241E 0EF475C6 CEF5ACA0 
+  E715E357 3B25F0F4 B33F4D6F D14C8CCB DD24A24B A5F241E5 C605A41C 6333A654 
+  25250203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14D1AC5D E870D9B5 30EDF4D3 492F381C 68ABE56F 3D301D06 
+  03551D0E 04160414 D1AC5DE8 70D9B530 EDF4D349 2F381C68 ABE56F3D 300D0609 
+  2A864886 F70D0101 05050003 81810015 F7A05BC6 AB4E2FE8 E50B8ACA 06B337F7 
+  D4539EC3 D7921053 7589070A AB80833E 0986AC05 57E44D45 43530273 B3BD4404 
+  E9FF9F7B F39038CF 9BCFD546 DAD3BFC3 BDE828CB C2BBE86E D5925A63 B9682172 
+  710BF2B9 1E0F60D1 820E4D0D 46AF1D24 C11DD758 000517EE 39DCBBAE 8121A36E 
+  CFC00F81 BC8746FF 78E1F817 6986DF
+  	quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/25
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/26
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/27
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/28
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/29
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/30
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/31
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/32
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/33
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/34
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/35
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/36
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/37
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/38
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/39
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/40
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/41
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/42
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/43
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/44
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/45
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/46
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/47
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/48
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.1.6 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.0.1.254
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+line vty 0 4
+ login local
+line vty 5 15
+ login
+!
+end
+
+>>>>>>>>> End <<<<<<<<<
+SSH connection established to 10.0.1.7:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.7        YES NVRAM  up                    up      
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  up                    up      
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  up                    up      
+FastEthernet0/5        unassigned      YES unset  up                    up      
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  up                    up      
+FastEthernet0/8        unassigned      YES unset  down                  down    
+FastEthernet0/9        unassigned      YES unset  up                    up      
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  up                    up      
+FastEthernet0/13       unassigned      YES unset  up                    up      
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  up                    up      
+FastEthernet0/16       unassigned      YES unset  up                    up      
+FastEthernet0/17       unassigned      YES unset  up                    up      
+FastEthernet0/18       unassigned      YES unset  up                    up      
+FastEthernet0/19       unassigned      YES unset  down                  down    
+FastEthernet0/20       unassigned      YES unset  up                    up      
+FastEthernet0/21       unassigned      YES unset  up                    up      
+FastEthernet0/22       unassigned      YES unset  down                  down    
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  down                  down    
+FastEthernet0/25       unassigned      YES unset  down                  down    
+FastEthernet0/26       unassigned      YES unset  down                  down    
+FastEthernet0/27       unassigned      YES unset  down                  down    
+FastEthernet0/28       unassigned      YES unset  down                  down    
+FastEthernet0/29       unassigned      YES unset  down                  down    
+FastEthernet0/30       unassigned      YES unset  down                  down    
+FastEthernet0/31       unassigned      YES unset  down                  down    
+FastEthernet0/32       unassigned      YES unset  down                  down    
+FastEthernet0/33       unassigned      YES unset  down                  down    
+FastEthernet0/34       unassigned      YES unset  down                  down    
+FastEthernet0/35       unassigned      YES unset  down                  down    
+FastEthernet0/36       unassigned      YES unset  down                  down    
+FastEthernet0/37       unassigned      YES unset  down                  down    
+FastEthernet0/38       unassigned      YES unset  up                    up      
+FastEthernet0/39       unassigned      YES unset  down                  down    
+FastEthernet0/40       unassigned      YES unset  up                    up      
+FastEthernet0/41       unassigned      YES unset  up                    up      
+FastEthernet0/42       unassigned      YES unset  down                  down    
+FastEthernet0/43       unassigned      YES unset  down                  down    
+FastEthernet0/44       unassigned      YES unset  up                    up      
+FastEthernet0/45       unassigned      YES unset  up                    up      
+FastEthernet0/46       unassigned      YES unset  up                    up      
+FastEthernet0/47       unassigned      YES unset  down                  down    
+FastEthernet0/48       unassigned      YES unset  up                    up      
+GigabitEthernet0/1     unassigned      YES unset  up                    up      
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+Building configuration...
+
+Current configuration : 7444 bytes
+!
+! Last configuration change at 05:21:00 UTC Sat Jan 22 1994 by admin
+!
+version 15.2
+no service pad
+service telnet-zeroidle
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sw2960-5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username admin privilege 15 password 0 huasan@123
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip dhcp snooping
+!
+!
+crypto pki trustpoint TP-self-signed-2691695488
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2691695488
+ revocation-check none
+ rsakeypair TP-self-signed-2691695488
+!
+!
+crypto pki certificate chain TP-self-signed-2691695488
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32363931 36393534 3838301E 170D3933 30333031 30303031 
+  31345A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 36393136 
+  39353438 3830819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  81009AB2 37CFB763 4D54B466 D2A504C7 A65E3FD5 C160EAF7 2C45C730 D6BFF042 
+  99147478 D9E3635F E624E7A5 9A43814F 3347353C 523DA7A5 C8CED780 D3626054 
+  9F8A1BD1 935C18C0 01723626 803D379B AFCEE288 97503AEC 25B0B190 9BB96850 
+  CCA19475 D9400BA6 F68FF952 BB0D23FC 48D30968 3D8BA2D5 F698298C CEB237AB 
+  4D9B0203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 149E56A6 A0BB133B 0072253C 2CF4701F C9B7CCD4 4C301D06 
+  03551D0E 04160414 9E56A6A0 BB133B00 72253C2C F4701FC9 B7CCD44C 300D0609 
+  2A864886 F70D0101 05050003 8181005C 40809ED5 7DE5E75B 3D85B24E D3DB64CB 
+  A9BEE9CB 3322B12A D831D1F3 36BD6003 123CE2ED A07B6A21 160E8230 D538CBC8 
+  6CA69AF7 697B5246 809700C7 66FB013D A44C4057 6402B5F8 5B658507 94EE8E1B 
+  DBD1F437 56D2D448 A2486C25 6B399BAD 813A3F59 3D51F308 6CAA7173 B0712BDC 
+  22E0DF9E 63EA989B 4B746D06 4C281B
+  	quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/25
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/26
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/27
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/28
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/29
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/30
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/31
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/32
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/33
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/34
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/35
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/36
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/37
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/38
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/39
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/40
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/41
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/42
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/43
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/44
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/45
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/46
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/47
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/48
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.1.7 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.0.1.254
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+ password huasan@123
+line vty 0 4
+ login local
+line vty 5 15
+ login
+!
+end
+
+>>>>>>>>> End <<<<<<<<<
+SSH connection established to 10.0.1.8:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.8        YES NVRAM  up                    up      
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  down                  down    
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  down                  down    
+FastEthernet0/5        unassigned      YES unset  down                  down    
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  up                    up      
+FastEthernet0/9        unassigned      YES unset  down                  down    
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  up                    up      
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  up                    up      
+FastEthernet0/16       unassigned      YES unset  down                  down    
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  up                    up      
+FastEthernet0/19       unassigned      YES unset  up                    up      
+FastEthernet0/20       unassigned      YES unset  down                  down    
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  up                    up      
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  up                    up      
+FastEthernet0/25       unassigned      YES unset  down                  down    
+FastEthernet0/26       unassigned      YES unset  up                    up      
+FastEthernet0/27       unassigned      YES unset  up                    up      
+FastEthernet0/28       unassigned      YES unset  down                  down    
+FastEthernet0/29       unassigned      YES unset  down                  down    
+FastEthernet0/30       unassigned      YES unset  down                  down    
+FastEthernet0/31       unassigned      YES unset  down                  down    
+FastEthernet0/32       unassigned      YES unset  down                  down    
+FastEthernet0/33       unassigned      YES unset  down                  down    
+FastEthernet0/34       unassigned      YES unset  down                  down    
+FastEthernet0/35       unassigned      YES unset  down                  down    
+FastEthernet0/36       unassigned      YES unset  down                  down    
+FastEthernet0/37       unassigned      YES unset  down                  down    
+FastEthernet0/38       unassigned      YES unset  down                  down    
+FastEthernet0/39       unassigned      YES unset  down                  down    
+FastEthernet0/40       unassigned      YES unset  down                  down    
+FastEthernet0/41       unassigned      YES unset  up                    up      
+FastEthernet0/42       unassigned      YES unset  down                  down    
+FastEthernet0/43       unassigned      YES unset  up                    up      
+FastEthernet0/44       unassigned      YES unset  down                  down    
+FastEthernet0/45       unassigned      YES unset  down                  down    
+FastEthernet0/46       unassigned      YES unset  down                  down    
+FastEthernet0/47       unassigned      YES unset  down                  down    
+FastEthernet0/48       unassigned      YES unset  down                  down    
+GigabitEthernet0/1     unassigned      YES unset  up                    up      
+GigabitEthernet0/2     unassigned      YES unset  down                  down    
+Building configuration...
+
+Current configuration : 7444 bytes
+!
+! Last configuration change at 00:06:27 UTC Sat Dec 11 1993 by admin
+!
+version 15.2
+no service pad
+service telnet-zeroidle
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname sw2960-6
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username admin privilege 15 password 0 huasan@123
+no aaa new-model
+system mtu routing 1500
+!
+!
+!
+!
+!
+!
+!
+ip dhcp snooping
+!
+!
+crypto pki trustpoint TP-self-signed-2691811584
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-2691811584
+ revocation-check none
+ rsakeypair TP-self-signed-2691811584
+!
+!
+crypto pki certificate chain TP-self-signed-2691811584
+ certificate self-signed 01
+  3082022B 30820194 A0030201 02020101 300D0609 2A864886 F70D0101 05050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 32363931 38313135 3834301E 170D3933 30333031 30303031 
+  31325A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D32 36393138 
+  31313538 3430819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  8100CF7D 21584C8E 7C7A07A4 C42CFAF2 30914054 B9A52A0A 8D8EE351 FFEF3127 
+  B5DB8DE4 EE7847BC C4FBD691 56FA35D6 ECE75326 E9406DCD D5137740 98882BDB 
+  4DB980BC 7A1814F3 74CBE6C9 50C0E4AC D493F265 FEA6A1A1 B59D055F A22849ED 
+  86BFF31D 12617BA6 23AB3E6F 31752F5C D13B8B12 3D60C040 52AD3843 C947DF11 
+  FE530203 010001A3 53305130 0F060355 1D130101 FF040530 030101FF 301F0603 
+  551D2304 18301680 14D35D5A 77598802 F1CEA69A EF9569AD ED31414E E6301D06 
+  03551D0E 04160414 D35D5A77 598802F1 CEA69AEF 9569ADED 31414EE6 300D0609 
+  2A864886 F70D0101 05050003 81810057 E010C374 9A5852BF 22B87653 AC78642E 
+  82CC062F F9393123 30CE9009 4D8D76CB F6DF6CEA 9E11EA99 A2C3E7DE 3D4038BA 
+  78F7AD3B 657C9A92 40CD2BE8 D6C461FC 63D9D9E5 BE9CF5A9 BAE93A22 16FF22EE 
+  0860DB38 28159D14 8FF124E8 275E9BC3 91D54980 DB748BB3 F97D6AAA DCA73FBC 
+  16F8F2BC CA1663A1 4DBECCA2 D562D1
+  	quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/2
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/3
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/4
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/5
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/6
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/7
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/8
+ switchport access vlan 40
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/9
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/10
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/11
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/12
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/13
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/14
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/15
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/16
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/17
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/18
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/19
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/20
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/21
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/22
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/23
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/24
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/25
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/26
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/27
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/28
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/29
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/30
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/31
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/32
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/33
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/34
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/35
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/36
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/37
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/38
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/39
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/40
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/41
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/42
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/43
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/44
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/45
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/46
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/47
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface FastEthernet0/48
+ switchport access vlan 60
+ switchport mode access
+ spanning-tree portfast
+!
+interface GigabitEthernet0/1
+ switchport mode trunk
+ ip dhcp snooping trust
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ ip address 10.0.1.8 255.255.255.0
+ no ip route-cache
+!
+ip default-gateway 10.0.1.254
+ip http server
+ip http secure-server
+!
+!
+!
+line con 0
+ password huasan@123
+line vty 0 4
+ login local
+line vty 5 15
+ login
+!
+end
+
+>>>>>>>>> End <<<<<<<<<
+SSH connection established to 10.0.1.9:22
+Interactive SSH session established
+
+
+>>>>>>>>> Device cisco_ios <<<<<<<<<
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  10.0.1.9        YES NVRAM  up                    up      
+FastEthernet0/1        unassigned      YES unset  up                    up      
+FastEthernet0/2        unassigned      YES unset  up                    up      
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  up                    up      
+FastEthernet0/5        unassigned      YES unset  up                    up      
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  up                    up      
+FastEthernet0/8        unassigned      YES unset  down                  down    
+FastEthernet0/9        unassigned      YES unset  down                  down    
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  down                  down    
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  down                  down    
+FastEthernet0/16       unassigned      YES unset  down                  down    
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  down                  down    
+FastEthernet0/19       unassigned      YES unset  down                  down    
+FastEthernet0/20       unassigned      YES unset  down                  down    
+FastEthernet0/21       unassigned      YES unset  down                  down    
+FastEthernet0/22       unassigned      YES unset  down                  down    
+FastEthernet0/23       unassigned      YES unset  down                  down    
+FastEthernet0/24       unassigned      YES unset  down                  down    
+FastEthernet0/25       unassigned      YES unset  down                  down    
+FastEthernet0/26       unassigned      YES unset  down                  down    
+FastEthernet0/27       unassigned      YES unset  down                  down    
+FastEthernet0/28       unassigned      YES unset  down                  down    
+FastEthernet0/29       unassigned      YES unset  down                  down    
+FastEthernet0/30       unassigned      YES unset  down                  down    
+FastEthernet0/31       unassigned      YES unset  down                  down    
+FastEthernet0/32       unassigned      YES unset  down                  down    
+FastEthernet0/33       unassigned      YES unset  down                  down    
+FastEthernet0/34       unassigned      YES unset  down                  down    
+FastEthernet0/35       unassigned      YES unset  down                  down    
+FastEthernet0/36       unassigned      YES unset  down                  down    
+FastEthernet0/37       unassigned      YES unset  up                    up      
+FastEthernet0/38       unassigned      YES unset  up                    up      
+FastEthernet0/39       unassigned      YES unset  up                    up      
+FastEthernet0/40       unassigned      YES unset  up                    up      
+FastEthernet0/41       unassigned      YES unset  up                    up      
+FastEthernet0/42       unassigned      YES unset  down                  down    
+FastEthernet0/43       unassigned      YES unset  up                    up      
+FastEthernet0/44       unassigned      YES unset  up                    up      
+FastEthernet0/45       unassigned      YES unset  up                    up      
+FastEthernet0/46       unassigned      YES unset  down                  down    
+FastEthernet0/47       unassigned      YES unset  up                    up      
+FastEthernet0/48       unassigned      YES unset  up                    up      
+GigabitEthernet0/1     unassigned      YES unset  down                  down    
+GigabitEthernet0/2     unassigned      YES unset  up                    up      
+               ^
+% Invalid input detected at '^' marker.
+
+>>>>>>>>> End <<<<<<<<<
+Finished: SUCCESS

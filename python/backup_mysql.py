@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ###########################################################
-#
+# python2 or python3
 # This python script is used for mysql database backup
 # using mysqldump and tar utility.
 #
